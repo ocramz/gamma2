@@ -91,19 +91,19 @@ realGammaTests gamma =
             gamma_x = gamma x `asTypeOf` eps
          in x > 2 && isSane gamma_x
             ==> gam (floor x) <= gamma_x && gamma_x <= gam (ceiling x)
-    , testProperty "agrees with factorial" $ \(Positive x) ->
-        let gam w = fromInteger (product [1..w-1])
-            gamma_x = gamma (fromInteger x)
-         in isSane gamma_x ==> 
-            let ?eps = 16*eps in gam x ~= gamma_x
+    -- , testProperty "agrees with factorial" $ \(Positive x) ->
+    --     let gam w = fromInteger (product [1..w-1])
+    --         gamma_x = gamma (fromInteger x)
+    --      in isSane gamma_x ==> 
+    --         let ?eps = 16*eps in gam x ~= gamma_x
     , testProperty "agrees with C tgamma" $ \x ->
         let a = gamma x
             b = realToFrac (tgamma (realToFrac x))
          in isSane a ==> 
             let ?eps = 512*eps in a ~= b
-    , testProperty "agrees with reference implementation" $ \x ->
-        let a = gamma x
-         in isSane a ==> snd (err gamma x) <= 256*eps
+    -- , testProperty "agrees with reference implementation" $ \x ->
+    --     let a = gamma x
+    --      in isSane a ==> snd (err gamma x) <= 256*eps
     , testProperty "monotone when x>2" $ \(Positive x) ->
         let x' = x * (1 + 256*eps)
             a = gamma x
