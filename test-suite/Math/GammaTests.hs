@@ -103,7 +103,7 @@ realGammaTests gamma =
             let ?eps = 512*eps in a ~= b
     -- , testProperty "agrees with reference implementation" $ \x ->
     --     let a = gamma x
-    --      in isSane a ==> snd (err gamma x) <= 256*eps
+    --      in isSane a ==> snd (err gamma x) <= 256 * eps 
     , testProperty "monotone when x>2" $ \(Positive x) ->
         let x' = x * (1 + 256*eps)
             a = gamma x
